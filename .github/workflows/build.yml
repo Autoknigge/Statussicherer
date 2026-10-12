@@ -5,6 +5,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,8 +25,10 @@ jobs:
       - name: APK bauen
         working-directory: StatusSicherer
         run: gradle assembleDebug --no-daemon --stacktrace
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Status-Sicherer-APK
-          path: StatusSicherer/app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
+      - name: Release veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp StatusSicherer/app/build/outputs/apk/debug/app-debug.apk Status-Sicherer.apk
+          gh release delete aktuell --yes --cleanup-tag || true
+          gh release create aktuell Status-Sicherer.apk --title "Status-Sicherer" --notes "Aktuelle Version" --target "${{ github.sha }}"
