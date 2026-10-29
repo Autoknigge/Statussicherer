@@ -1,9 +1,9 @@
-# Status-Sicherer
+# Status-Sicherer Profi
 
 Android-App, die die Status-Dateien von WhatsApp und WhatsApp Business selbst findet, als Übersicht mit Vorschau zeigt und Kopien in der Galerie ablegt (Bilder unter „Pictures/Status-Sicherer“, Videos unter „Movies/Status-Sicherer“).
 
 - Es erscheinen nur Status, die in WhatsApp bereits angesehen wurden.
-- Die App hat keine Internetberechtigung und lädt nichts hoch.
+- Die App ist kostenlos und zeigt Werbung (Google AdMob, mit Einwilligungsabfrage). Internet braucht sie nur dafür, Status lädt sie nicht hoch.
 - Die Hintergrundfarbe ist einstellbar (Knopf „Farbe“).
 - Voraussetzung: Android 11 oder neuer.
 
@@ -15,9 +15,11 @@ Die aktuelle Version liegt unter „Releases“ („Veröffentlichungen“):
 
 https://github.com/Autoknigge/Statussicherer/releases/download/aktuell/Status-Sicherer.apk
 
+Für Google Play liegt im selben Release die gleiche Fassung als `Status-Sicherer.aab` (identischer Stand).
+
 1. Die Datei öffnen. Android fragt, ob der Browser oder die Dateien-App Apps installieren darf. Das einmal erlauben.
 2. Warnt Google Play Protect, weil die App nicht aus dem Play Store stammt: „Trotzdem installieren“.
-3. Beim ersten Start „Zugriff auf alle Dateien erlauben“ antippen und den Schalter für Status-Sicherer einschalten. Alternativ den WhatsApp-Ordner einmalig freigeben („WhatsApp-Ordner wählen“).
+3. Beim ersten Start „WhatsApp-Ordner wählen“ antippen und den Ordner einmalig freigeben („Diesen Ordner verwenden“, „Zulassen“). Die Berechtigung „Zugriff auf alle Dateien“ braucht die App nicht.
 4. „Alle neuen speichern“ sichert alles, was noch nicht gespeichert wurde.
 
 Neue Versionen lassen sich direkt über die alte App installieren. Nur wer noch eine Version vor dem festen Signaturschlüssel hat, muss einmal deinstallieren.
