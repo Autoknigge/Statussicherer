@@ -36,11 +36,19 @@ jobs:
         working-directory: StatusSicherer
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-        run: gradle assembleRelease --no-daemon --stacktrace
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+          ADMOB_BANNER_ID: ${{ secrets.ADMOB_BANNER_ID }}
+          ADMOB_OPEN_ID: ${{ secrets.ADMOB_OPEN_ID }}
+        run: >
+          gradle assembleRelease bundleRelease --no-daemon --stacktrace
+          -PADMOB_APP_ID="$ADMOB_APP_ID"
+          -PADMOB_BANNER_ID="$ADMOB_BANNER_ID"
+          -PADMOB_OPEN_ID="$ADMOB_OPEN_ID"
       - name: Release veröffentlichen
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp StatusSicherer/app/build/outputs/apk/release/app-release.apk Status-Sicherer.apk
+          cp StatusSicherer/app/build/outputs/bundle/release/app-release.aab Status-Sicherer.aab
           gh release delete aktuell --yes --cleanup-tag || true
-          gh release create aktuell Status-Sicherer.apk --title "Status-Sicherer" --notes "Aktuelle Version" --target "${{ github.sha }}"
+          gh release create aktuell Status-Sicherer.apk Status-Sicherer.aab --title "Status-Sicherer" --notes "Aktuelle Version (APK zum Installieren, AAB für Google Play)" --target "${{ github.sha }}"
